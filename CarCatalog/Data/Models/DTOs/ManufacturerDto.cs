@@ -1,10 +1,8 @@
-﻿namespace CarCatalog.Data.Models
+namespace CarCatalog.Data.Models.DTOs
 {
-    public class Manufacturer
+    public class ManufacturerDto
     {
-        public int ManufacturerId { get; set; }
         public string ManufacturerName { get; set; }
-
         public int CountryId { get; set; }
         public Country CountryOrigin { get; set; }
     }
