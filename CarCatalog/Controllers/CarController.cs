@@ -7,27 +7,26 @@ using Microsoft.AspNetCore.Mvc;
 namespace CarCatalog.Controllers
 {
     [ApiController]
-    [Route("/api/[controller]")]
+    [Route("/api/[controller]/[action]")]
     public class CarController : ControllerBase
     {
-        private readonly ICarRepository _carRepository;
+        private readonly ICarService _carService;
 
-        public CarController(ICarRepository repo)
+        public CarController(ICarService repo)
         {
-            this._carRepository = repo;
+            this._carService = repo;
         }
 
-        [HttpGet(Name = "GetAllCars")]
-        public ActionResult<IEnumerable<Car>> Get() => Ok(_carRepository.GetAllCars());
-
+        [HttpGet(Name = "AllCars")]
+        public ActionResult<IEnumerable<Car>> Get() => Ok(_carService.GetAllCars());
+        
         [HttpPost(Name = "AddCar")]
         public ActionResult<Car> CreateCar(Car car)
         {
-            var result = _carRepository.AddCar(car);
-            if (_carRepository.SaveChanges()) 
+            var result = _carService.AddCar(car);
+            if (_carService.SaveChanges()) 
                 return Ok(result);
             return BadRequest("Cannot add car");
-
         }
 
     }
